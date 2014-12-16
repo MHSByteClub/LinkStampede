@@ -18,7 +18,7 @@ var hoverBox = {
     startHTML: function(id) {
         return '<div class="hoverpediabox arrow_box" id="' + id + '">' +
                     '<div class="hoverpediabox_noverflow">' +
-                    '<img class="hoverpediabox_loading" alt="Loading Wiki...">'+
+                    '<img class="hoverpediabox_loading" alt="Loading ...">'+
                     '<h2></h2>' +
                     '<p>';
     },
@@ -195,10 +195,10 @@ function getTitleAndParagraph(data, charLimit) {
 }
 
 /**
- * Creates an AJAX request to Wikipedia to fetch requested page title
+ * Creates an AJAX request to page to fetch requested page title
  * @param pageTitle
  */
-function fetchWiki(pageTitle) {
+function fetch(pageTitle) {
 
     var charLimit = 400;
     $.get(pageTitle,
@@ -210,37 +210,28 @@ function fetchWiki(pageTitle) {
     );
 }
 
-function isWikiLink(href) {
-    return href === undefined ? false :
-        href.match(/(wikipedia\.org\/wiki\/|wikipedia\.org%2Fwiki)/) !== null
-        || (window.location.href.match(/wikipedia/) && href.match(/\/wiki\//) !== null);
-}
 /**
- * Controls mousing over a wiki link
+ * Controls mousing over a  link
  * @param anchor
  */
-var mouseOverWikiLink = function(anchor) {
+var mouseOverLink = function(anchor) {
     var href = anchor.attr('href');
 
-    if (isWikiLink(href)) {
-        fetchWiki(href);
-    }
+    fetch(href);
 
 };
 
 /**
- * Controls mousing off a wiki link
+ * Controls mousing off a  link
  */
-var mouseLeaveWikiLink = function(anchor) {
+var mouseLeaveLink = function(anchor) {
     hoveringOverLink = false;
     removeAnchorOutlines(anchor);
 };
 
-function outlineWikiAnchors(anchor) {
+function outlineAnchors(anchor) {
     var href = anchor.attr('href');
-    if (isWikiLink(href)) {
-        anchor.css('outline', '2px dashed #ff6406');
-    }
+    anchor.css('outline', '2px dashed #ff6406');
 }
 
 function removeAnchorOutlines(anchor) {
@@ -254,11 +245,8 @@ $( function() {
 
     a.each(function(index) {
         var anchor = $(this);
-        var href = anchor.attr('href');
-
-        if (window.location.href.match(/wikipedia\.org/) === null) {
-            outlineWikiAnchors(anchor);
-        }
+        
+        outlineAnchors(anchor);
     });
 
     hoverBox.initialiseHoverBoxElement();
@@ -269,10 +257,10 @@ $( function() {
      */
     a.hoverIntent(
         function() {
-            mouseOverWikiLink($(this));
+            mouseOverLink($(this));
         },
         function() {
-            mouseLeaveWikiLink($(this));
+            mouseLeaveLink($(this));
         }
     );
 
@@ -280,10 +268,10 @@ $( function() {
     a.hover(
         function() {
             var $this = $(this);
-            outlineWikiAnchors($this);
+            outlineAnchors($this);
         },
         function() {
-            mouseLeaveWikiLink($(this));
+            mouseLeaveLink($(this));
         }
     );
 
