@@ -167,7 +167,21 @@ var hoverBox = {
  * @returns {{title: string, paragraph: string }}
  */
 function getTitleAndParagraph(data, charLimit) {
-
+    var paragraph = "", title = "open";
+    
+    var content = document.body.textContent || document.body.innerText;
+    var teacherBlocked = "Access to the web page you were trying to visit has been blocked in accordance with company policy. Please contact your system administrator if you believe this is in error.";
+    var studentBlocked = "Access to this page has been blocked by your network administrator.";
+    
+    var el = $('<div></div>'); //create dummy element
+    el.html(data);
+    
+    var hasText = el.indexOf(teacherBlocked)!==-1 || el.indexOf(studentBlocked)!==-1;
+    if(hasText){
+       title = "blocked";
+    }
+    
+    /*
     var el = $('<div></div>'); //create dummy element
     el.html(data);
 
@@ -186,7 +200,7 @@ function getTitleAndParagraph(data, charLimit) {
 
     if (paragraph.html == null || paragraph.html == undefined || paragraph.html == "") {
         paragraph.html = "Can't find any content to fetch on this page";
-    }
+    }*/
 
     return {
         title: title,
