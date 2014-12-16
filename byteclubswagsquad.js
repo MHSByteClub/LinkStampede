@@ -176,7 +176,7 @@ function getTitleAndParagraph(data, charLimit) {
     var el = $('<div></div>'); //create dummy element
     el.html(data);
     
-    var hasText = el.indexOf(teacherBlocked)!==-1 || el.indexOf(studentBlocked)!==-1;
+    var hasText = data.indexOf(teacherBlocked)!==-1 || data.indexOf(studentBlocked)!==-1;
     if(hasText){
        title = "blocked";
     }
