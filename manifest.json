@@ -1,0 +1,15 @@
+{
+  "name": "Link Stampede",
+  "version": "0.1",
+  "description": "Lets you know whether a link is visitable on the d120 network or not.",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["lib/jquery-2.1.0.min.js", "lib/hoverIntent.js", "src/byteclubswagsquad_background.js"]
+    }
+  ],
+  "permissions": [
+    "<all_urls>"
+  ],
+  "manifest_version": 2
+}
