@@ -5,7 +5,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["jquery-2.1.0.min.js", "hoverIntent.js", "byteclubswagsquad_background.js"]
+      "js": ["jquery-2.1.0.min.js", "hoverIntent.js", "byteclubswagsquad.js"]
     }
   ],
   "permissions": [
